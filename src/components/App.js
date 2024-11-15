@@ -43,29 +43,6 @@ function App() {
 
   return (
     <>
-      <div className="editor-theme-dropdown">
-        <div className="custom-arrow">
-          {isFocused ? (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="10"
-              height="10"
-              viewBox="0 0 10 10"
-            >
-              <path fill="#ffffff" d="M0 7l5-5 5 5H0z" />
-            </svg>
-          ) : (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="10"
-              height="10"
-              viewBox="0 0 10 10"
-            >
-              <path fill="#ffffff" d="M0 3l5 5 5-5H0z" />
-            </svg>
-          )}
-        </div>
-      </div>
       <div className="pane top-pane">
         <Editor
           accept=".html"
