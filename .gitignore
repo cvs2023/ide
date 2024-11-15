@@ -5,6 +5,12 @@
 /.pnp
 .pnp.js
 
+# tasks
+tasks.text
+
+#copy
+copy
+
 # testing
 /coverage
 

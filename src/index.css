@@ -1,13 +1,185 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+::-webkit-scrollbar {
+  width: 12px;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px rgb(44, 97, 90);
+  border-radius: 0.5rem;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(44, 97, 90);
+  border-radius: 0.5rem;
+  background-color: rgb(148, 148, 148);
+}
+
+/* Handle on hover not working inside */
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(201, 184, 187);
+}
+
+.top-pane {
+  padding: 0.5rem;
+  background-color: hsl(225, 6%, 25%);
+}
+.pane {
+  height: 50vh;
+  display: flex;
+  padding: 0;
+}
+
+.editor-Container {
+  /* takes left space */
+  flex-grow: 1;
+  transition: flex-grow 0.8s ease;
+
+  /* same size ho jae */
+  flex-basis: 0;
+  background-color: hsl(225, 6%, 25%);
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  min-width: 25%;
+}
+.editor-title {
+  min-height: 1.4rem;
+  background-color: hsl(225, 6%, 13%);
+  padding: 0.5rem 0.5rem 0.5rem 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  border-top-right-radius: 0.5rem;
+  border-top-left-radius: 0.5rem;
+  overflow: hidden;
+}
+.CodeMirror {
+  height: 100% !important;
+}
+.code-mirror-wrapper {
+  flex-grow: 1;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  overflow: hidden;
+}
+.bottom-pane {
+  /* height: 100vh; */
+  background-color: rgb(213, 213, 213);
+}
+
+.editor-Container.collapased {
+  flex-grow: 0;
+  transition: flex-grow 0.8s ease;
+}
+/* when we have more text to it will not make editor move  and make it fix*/
+.editor-Container.collapased .CodeMirror-scroll {
+  position: absolute;
+  overflow: hidden !important;
+}
+.btn {
+  cursor: pointer;
+  font-size: 0.8rem;
+  color: white;
+  border: none;
+  padding: 0.3rem;
+}
+
+.editor-btns {
+  display: flex;
+  align-items: center;
+}
+.editor-reset-btn {
+  font-size: 0.7rem;
+
+  background-color: transparent;
+}
+.editor-collapse-btn:hover {
+  scale: 1.1;
+  color: rgb(191, 255, 168);
+}
+
+/* .editor-theme-dropdown3 {
+  display: flex;
+  background-color: hsl(225, 6%, 25%);
+  justify-content: end;
+  padding: 0.7rem 0.5rem 0 0;
+  position: relative;
+}
+.editor-theme-dropdown3 select {
+  color: #ffffff;
+  border-radius: 1rem;
+  padding: 0.2rem 0.8rem 0.2rem 0.4rem;
+  background-color: hsl(225, 6%, 25%);
+
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+} */
+.editor-theme-dropdown {
+  display: flex;
+  justify-content: end;
+  background-color: hsl(225, 6%, 25%);
+  padding: 0.5rem 0.5rem 0rem 0.5rem;
+  position: relative;
+}
+.input {
+  font-size: 0.7rem;
+  border: unset;
+  background-color: hsl(225, 6%, 25%);
+  color: #fff;
+  width: 15%;
+  max-width: 400px;
+  padding: 0.7rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  /* hide arrow */
+  appearance: none;
+}
+.custom-arrow {
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.7rem top 50%;
+  background-size: 0.65rem auto;
+  transition: transform 0.2s ease;
+  position: absolute;
+  top: 17px;
+  right: 30px;
+}
+
+.editor-theme-dropdown:focus + .custom-arrow,
+.editor-theme-dropdown:active + .custom-arrow {
+  transform: translateY(-50%) rotate(180deg); /* Rotate arrow */
+}
+
+.input:focus-visible {
+  outline: none !important; /* Explicitly remove outline */
+}
+
+.editor-upload-file {
+  margin-top: 10px;
+  .editor-choose-file {
+    font-size: 0.8rem;
+    background-color: #2b2b2b;
+    color: #ffffff;
+    padding: 0.4rem 0.5rem;
+    margin: 10px 0 10px 0;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+}
+
+.editor-modal-reset-btn,
+.editor-modal-cancel-btn {
+  color: #fdfdfd;
+  background-color: #439bd6;
+  border-radius: 0.3rem;
+  font-size: 1rem;
+  padding: 0.5em;
 }
